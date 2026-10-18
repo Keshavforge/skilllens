@@ -1,7 +1,10 @@
+from pathlib import Path
+
 from fastapi import FastAPI, HTTPException
 from fastapi.exceptions import RequestValidationError
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import JSONResponse
+from fastapi.staticfiles import StaticFiles
 
 from app.api.routes import router
 from app.core.config import frontend_origins
@@ -22,6 +25,12 @@ app.add_middleware(
     allow_headers=["Content-Type"],
 )
 app.include_router(router)
+
+# In the container, the frontend build is copied beside the backend. Local API
+# development remains independent when no production build is present.
+frontend_dist = Path(__file__).resolve().parents[2] / "frontend" / "dist"
+if frontend_dist.is_dir():
+    app.mount("/", StaticFiles(directory=frontend_dist, html=True), name="frontend")
 
 
 @app.exception_handler(RequestValidationError)

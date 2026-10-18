@@ -123,6 +123,12 @@ npm run build
 
 The backend tests cover normalization, matching, score edge cases, file parsing and validation, API errors, and AI fallback/error behavior. The frontend tests cover empty-state/form behavior and score display. Run the commands above in your own environment before making release or deployment claims.
 
+## Deploy on Render
+
+The repository includes a Render Blueprint and a multi-stage Dockerfile that build the frontend and serve it with the FastAPI API from one origin. To publish a live instance, create a Render account, connect this public GitHub repository, and deploy the Blueprint using `render.yaml`. Render will build from the repository root and check `/api/health` after startup. No AI key is required; without one, recommendations remain rule-based.
+
+The Blueprint selects Render's free web-service plan for this portfolio demo. Free web services can spin down after inactivity, so the first request after a quiet period may take longer. The app is stateless and does not intentionally retain resume text; users should still avoid submitting sensitive information to any public demo. For a production deployment, review provider data handling, availability, and plan limits first.
+
 ## Screenshots
 
 ![SkillLens landing page and resume/job input workspace](screenshots/skilllens-home.png)
