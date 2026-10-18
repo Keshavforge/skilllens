@@ -1,0 +1,33 @@
+# Secrets and personal data
+.env
+.env.*
+!.env.example
+**/.env
+**/.env.*
+!**/.env.example
+*.db
+*.sqlite
+*.sqlite3
+**/uploads/
+**/reports/
+
+# Python
+.venv/
+venv/
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.coverage
+htmlcov/
+
+# JavaScript
+node_modules/
+frontend/dist/
+frontend/coverage/
+frontend/.vite/
+
+# OS/editor
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
